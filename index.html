@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#182137" name="theme-color"/>
+<meta content="Диспетчерская уличного освещения. Проверка кадров, модельные маршруты и план осмотров по учебным данным." name="description"/>
+<title>LUMEN 5.0 · Городское освещение Тюмени</title>
+<meta content="LUMEN 5.0 · Городское освещение Тюмени" property="og:title"/>
+<meta content="Диспетчерская уличного освещения. Проверка кадров, модельные маршруты и план осмотров по учебным данным." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="light" name="color-scheme"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="styles.css" rel="stylesheet"/>
+<link href="vision.css" rel="stylesheet"/>
+<link href="v4.css" rel="stylesheet"/>
+
+<link href="vendor/leaflet/leaflet.css" rel="stylesheet"/><link href="studio.css" rel="stylesheet"/></head>
+<body>
+<div class="app-shell">
+<aside class="sidebar" id="navigation"><a class="studio-brand" href="#overview"><span><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#Sun"></use></svg></span>LUMEN</a><p class="rail-sub">Городское освещение</p><nav aria-label="Разделы приложения"><p class="rail-label">Рабочая смена</p><button class="nav-btn" data-view="overview"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#LayoutDashboard"></use></svg><span>Обзор</span></button><button class="nav-btn" data-view="vision"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#ScanEye"></use></svg><span>Проверка кадра</span><b id="nav-review-count"></b></button><button class="nav-btn" data-view="dispatch"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#Inbox"></use></svg><span>Диспетчерская</span></button><button class="nav-btn" data-view="forecast"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#ClipboardList"></use></svg><span>План смены</span></button><p class="rail-label">Город и данные</p><button class="nav-btn" data-view="citymap"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#MapPinned"></use></svg><span>Геокарта</span></button><button class="nav-btn" data-view="routes"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#Route"></use></svg><span>Маршруты</span></button><button class="nav-btn" data-view="report"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#MessageSquare"></use></svg><span>Сообщить о проблеме</span></button><button class="nav-btn" data-view="analytics"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#ChartNoAxesColumn"></use></svg><span>Аналитика</span></button><button class="nav-btn" data-view="pilot"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#Telescope"></use></svg><span>О проекте</span></button></nav><div class="rail-foot"><b>Тюмень</b><span>Учебный проект · v5.0</span></div></aside>
+<button aria-label="Закрыть меню" hidden="" id="menu-shade"></button><div class="main-column">
+<header class="topbar"><div class="top-left"><button aria-controls="navigation" aria-expanded="false" aria-label="Открыть меню" class="icon-button" id="mobile-menu" type="button"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#Menu"></use></svg></button><span class="crumb">Тюмень <span>/</span></span><strong id="top-view">Обзор</strong></div><div class="top-controls"><span class="mode-text" id="shift-mode">Локальное демо</span><span class="today-chip" id="today-chip"></span><button class="top-tour-button" id="start-demo-top"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#Play"></use></svg> Сценарий защиты</button><button class="utility-button" hidden="" id="exit-tour">Выйти</button></div></header>
+<main class="main-content">
+<section class="view view-visible" id="view-overview">
+<div class="cover"><div class="cover-copy"><p class="cover-place"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#MapPin"></use></svg> Тюмень</p><h1>Городское <br/>освещение</h1><p class="cover-desc">Проверьте ночной кадр, выясните, где нужен осмотр, и соберите план выездов на смену.</p><div class="cover-actions"><button class="cover-primary" data-goto="vision">Проверить кадр <svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#ArrowRight"></use></svg></button><button class="cover-link" id="hero-tour"><svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#Play"></use></svg> Репетиция защиты</button></div></div><figure><img alt="Вечерний вид на освещённый Мост Влюблённых через Туру в Тюмени" height="872" src="assets/tyumen-night.webp" width="1550"/><figcaption>Мост Влюблённых <a aria-label="Автор и лицензия фотографии" href="credits.html">©</a></figcaption></figure></div>
+<div class="stats-grid">
+<article class="stat-card"><div class="stat-heading"><span>Активные обращения</span><span class="stat-symbol">↗</span></div><div class="stat-value" id="stat-active">—</div><div class="stat-footer"><span class="stat-flag bad">● Внимание</span><span>Требуют проверки</span></div></article>
+<article class="stat-card"><div class="stat-heading"><span>Критические сигналы</span><span class="stat-symbol pink">✳</span></div><div class="stat-value" id="stat-critical">—</div><div class="stat-footer"><span class="stat-flag bad">Приоритет 1</span><span>Темно и небезопасно</span></div></article>
+<article class="stat-card"><div class="stat-heading"><span>Условный индекс освещения</span><span class="stat-symbol">◒</span></div><div class="stat-value" id="stat-index">—</div><div class="stat-footer"><span class="stat-flag green">● Модель</span><span>Условный индекс, / 100</span></div></article>
+<article class="stat-card"><div class="stat-heading"><span>Решено обращений</span><span class="stat-symbol">✓</span></div><div class="stat-value" id="stat-resolved">—</div><div class="stat-footer"><span class="stat-flag green">● Закрыто</span><span>В пилотных данных</span></div></article>
+</div>
+
+<div class="workspace-grid">
+<section class="panel map-panel"><div class="panel-header"><div><span class="panel-kicker">СИТУАЦИОННЫЙ ЦЕНТР</span><h2>Пульс освещения <span class="muted-h2">/ Тюмень</span></h2></div><div class="map-legend"><span><i class="dot-pink"></i>Проблема</span><span><i class="dot-green"></i>Норма</span></div></div><div class="map-mount" id="overview-map"></div><div class="map-bottom"><span>15 участков и условные связи между ними.</span><button class="inline-action" data-goto="routes">Перейти к маршрутам →</button></div></section>
+<section class="panel feed-panel"><div class="panel-header compact"><div><span class="panel-kicker">ГОРОЖАНЕ СООБЩАЮТ</span><h2>Последние сигналы</h2></div><span class="small-counter" id="feed-counter">—</span></div><div class="report-feed" id="report-feed"></div><div class="feed-footer"><button class="text-link" data-goto="report">+ Создать новое обращение <span>↗</span></button></div></section>
+</div>
+<div class="bottom-grid"><section class="insight-panel"><span class="ai-insight-label">✦ LUMEN AI / ГОРОДСКОЙ ИНСАЙТ</span><h3 id="insight-heading">Найти проблему — только начало. Важно довести её до решения.</h3><p id="insight-copy">LUMEN объединяет сигналы, помогает управлять их обработкой и показывает, какие участки требуют внимания.</p><button class="insight-link" data-goto="analytics">Изучить аналитику ↗</button></section><section class="method-panel"><span class="panel-kicker">КАК ЭТО РАБОТАЕТ</span><h3>От сообщения до действия</h3><div class="method-steps"><div><span>01</span><b>Житель сообщает</b></div><div><span>02</span><b>Нейросеть разбирает</b></div><div><span>03</span><b>Диспетчер берёт в работу</b></div></div></section></div>
+</section>
+<section class="view" id="view-routes">
+<div class="page-heading"><h1>Маршруты</h1><p>Сравните длину и средний индекс света двух путей. Схема учебная, расстояния указаны в условных единицах.</p></div>
+<div class="route-layout"><div class="panel route-controls"><div class="panel-kicker">КОНСТРУКТОР МАРШРУТА</div><h2>Куда направляемся?</h2><label class="field-label" for="route-from">Откуда</label><select class="field-input" id="route-from"></select><button class="swap-route" id="swap-route" title="Поменять местами">⇅</button><label class="field-label" for="route-to">Куда</label><select class="field-input" id="route-to"></select><div class="route-mode-label">ПРИОРИТЕТ ПРИ ПОСТРОЕНИИ</div><div class="segment-control" id="mode-buttons"><button class="mode-btn" data-mode="fast">⚡ Быстрее</button><button class="mode-btn active" data-mode="safe">✦ Светлее</button></div><button class="primary-button full" id="build-route">Построить маршрут <span>↗</span></button><div class="route-summary" id="route-summary"></div></div><div class="panel route-map-panel"><div class="panel-header"><div><span class="panel-kicker">СРАВНЕНИЕ ПУТЕЙ</span><h2>Схема маршрута <span class="muted-h2">/ пилот</span></h2></div><span class="route-map-badge">◎ Режим пилота: подтверждённые сигналы</span></div><div class="map-mount route-map" id="route-map"></div><div class="map-bottom"><span>Демо-граф: не реальные дороги или метры · <a class="text-link" data-v4-to-map="1" href="#citymap">Показать геокарту Тюмени ↗</a></span></div></div></div><section class="panel detail-box comparison" id="route-compare"></section>
+
+</section>
+<section class="view" id="view-citymap">
+<div class="page-heading"><h1>Геокарта Тюмени</h1><p>Четыре городских ориентира нанесены по координатам. Улицы OpenStreetMap можно включить при подключении к интернету.</p></div>
+
+<div class="v4-geo-grid">
+<section class="panel v4-map-box"><div class="panel-header"><div><span class="panel-kicker">ГОРОДСКАЯ ПОДЛОЖКА</span><h2>Центр Тюмени</h2></div><span class="v4-map-flag">4 ориентира</span></div><div class="geo-tools"><button aria-pressed="true" class="utility-button" id="geo-scheme">Схема</button><button aria-pressed="false" class="utility-button" id="geo-streets">Улицы OSM</button><span id="geo-status" role="status"></span></div><div aria-label="Интерактивная карта Тюмени с демонстрационными зонами" id="v4-osm-map" role="application"></div><p class="map-note">Цвета точек отражают учебные обращения. Полевые измерения освещённости отсутствуют.</p></section>
+<section class="panel v4-locations"><div class="panel-header"><div><span class="panel-kicker">ГЕОГРАФИЧЕСКИЕ ОРИЕНТИРЫ</span><h2>Что видит карта</h2></div></div><div id="v4-location-list"></div><div aria-live="polite" id="geo-detail"></div></section>
+</div>
+
+</section>
+<section class="view" id="view-forecast">
+<div class="page-heading"><h1>План смены</h1><p>Настройте условия, выберите число выездов и сохраните очередь осмотров. Для каждого участка виден вклад пяти факторов.</p></div>
+
+<div class="v4-scenario-grid">
+<section class="panel v4-scenario-controls"><span class="panel-kicker">СИМУЛЯТОР СЦЕНАРИЯ</span><h2>Условия оценки</h2>
+<label for="v4-flow">Поток пешеходов <span id="v4-flow-value">Средний</span><input id="v4-flow" max="100" min="0" step="5" type="range" value="45"/></label>
+<label for="v4-weather">Погодная сложность <span id="v4-weather-value">30/100</span><input id="v4-weather" max="100" min="0" step="5" type="range" value="30"/></label>
+<label for="v4-cross">Значимость переходов и остановок <span id="v4-cross-value">60/100</span><input id="v4-cross" max="100" min="0" step="5" type="range" value="60"/></label>
+<label class="v4-check"><input checked="" id="v4-confirmed-only" type="checkbox"/> Учитывать только подтверждённые CV-сигналы</label><button class="utility-button" id="v4-reset-scenario" type="button">↺ Сбросить сценарий</button>
+<div class="shift-cap"><label for="shift-capacity">Выездов на смену</label><select class="field-input" id="shift-capacity"><option value="1">1</option><option value="2">2</option><option selected="" value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></div></section>
+<section class="panel v4-priority-results"><div class="panel-header"><h2>Очередь осмотров</h2></div><div id="v4-priority-list"></div><div class="v4-explainer"><b>Прозрачная формула</b><p>Приоритет = 45% условный дефицит света + 20% сигналы + 15% поток + 10% объекты + 10% погода. Коэффициенты демонстрационные, не обучены по городским авариям.</p></div><button class="primary-button" id="make-plan" type="button">Зафиксировать план <svg aria-hidden="true" class="ui-icon"><use href="assets/icons.svg#ArrowRight"></use></svg></button></section>
+</div>
+
+<section class="panel detail-box"><div class="section-head"><h2>Журнал осмотров</h2><button class="utility-button" disabled="" id="export-plan">Скачать CSV</button></div><div id="saved-plan"></div></section></section>
+<section aria-label="Лаборатория AI Vision" class="view" id="view-vision">
+<div class="page-heading"><h1>Проверка кадра</h1><p>Выберите учебную сцену или загрузите своё фото. Модель предложит класс, а решение о заявке примет диспетчер.</p></div>
+<div class="cv-disclaimer"><b>● Исследовательский прототип</b><span>Камеры города и Т2 не подключены. Примеры ниже сгенерированы программно; карта не является картой реальных фонарей. Модель не обучалась и не проверялась на реальной уличной видеосъёмке.</span></div>
+
+<div class="cv-workspace">
+<section class="panel cv-image-panel"><div class="panel-header"><div><span class="panel-kicker">ВХОДНЫЕ ДАННЫЕ / ПРИВАТНЫЙ АНАЛИЗ</span><h2>Кадр городской сцены</h2></div><span class="cv-source" id="cv-source-tag">СИНТЕТИЧЕСКИЙ ТЕСТ</span></div>
+<div class="cv-frame"><img alt="Синтетический пример ночной городской сцены" id="cv-preview" src="assets/dark.jpg"/><video aria-label="Предпросмотр камеры" autoplay="" hidden="" id="cv-video" muted="" playsinline=""></video><div class="cv-frame-stamp">VISION // CLIENT-SIDE <span>● DEMO</span></div></div>
+<div class="cv-frame-actions"><label class="utility-button cv-file-label" for="cv-file">↑ Загрузить фото <input accept="image/*" hidden="" id="cv-file" type="file"/></label><button class="utility-button" id="cv-start-camera" type="button">◉ Включить камеру</button><button class="utility-button" hidden="" id="cv-capture" type="button">● Сделать кадр</button><button class="utility-button" hidden="" id="cv-stop-camera" type="button">■ Остановить</button></div>
+<div class="cv-gallery-label">ПОПРОБУЙТЕ ПЯТЬ ТЕСТОВЫХ СЦЕН <span>изображения сгенерированы для демонстрации</span></div>
+<div class="cv-gallery" id="cv-gallery">
+<button data-cv-sample="lit" type="button"><img alt="Пример освещённого участка" src="assets/lit.jpg"/><b>Есть свет</b></button>
+<button class="active" data-cv-sample="dark" type="button"><img alt="Пример недостаточного света" src="assets/dark.jpg"/><b>Темно</b></button>
+<button data-cv-sample="uneven" type="button"><img alt="Пример неравномерного света" src="assets/uneven.jpg"/><b>Неравномерно</b></button>
+<button data-cv-sample="glare" type="button"><img alt="Пример засветки камеры" src="assets/glare.jpg"/><b>Засветка</b></button>
+<button data-cv-sample="day" type="button"><img alt="Пример дневной сцены" src="assets/day.jpg"/><b>День</b></button>
+</div><button class="primary-button full" id="cv-analyze" type="button">Анализировать кадр</button><p class="cv-privacy">Фото анализируется на устройстве. После перезагрузки для проверки пользовательского кадра понадобится тот же файл. В резервную копию фотографии не входят.</p>
+</section>
+<section class="panel cv-result-panel"><div class="panel-header"><div><span class="panel-kicker">AI-ВЫВОД / CNN ИНФЕРЕНС</span><h2>Разбор кадра</h2></div><span class="cv-live-chip">● МОДЕЛЬ В БРАУЗЕРЕ</span></div>
+<div class="cv-output" id="cv-output"><div class="cv-empty-symbol">◉</div><h3>Готов к анализу</h3><p>Нажмите кнопку ниже, чтобы запустить модель на выбранном изображении.</p></div>
+
+<div class="v4-cv-quality-note" hidden="" id="v4-cv-quality" role="status">Контроль качества кадра появится после анализа: алгоритм проверит контраст, пересветы и размытость. Низкое качество не означает неисправность.</div><div class="cv-trust"><b>Не путайте с измерением в люксах.</b> Даже высокий процент вероятности — лишь выход модели на тестовом распределении, а не достоверность диагноза. Настройки камеры, экспозиция, фары, снег и дождь искажают результат.</div>
+</section>
+</div>
+<section class="panel cv-review"><div class="panel-header"><div><span class="panel-kicker">HUMAN-IN-THE-LOOP</span><h2>Очередь визуальных сигналов <span class="muted-h2">/ локальная демо-версия</span></h2></div><span class="small-counter">БЕЗ ДОСТУПА К КАМЕРАМ ГОРОДА</span></div><div class="cv-review-intro">После анализа можно создать <b>предварительный сигнал</b>. Он не влияет на маршрут, пока человек не подтвердит его в демонстрационном режиме. Вся очередь хранится только в этом браузере.</div><div class="cv-review-list" id="cv-review-list"></div></section>
+<section class="panel cv-tech"><div><span class="panel-kicker">ПОД КАПОТОМ / ПРОЗРАЧНЫЙ AI</span><h2>Как работают две модели</h2><p><b>Vision CNN:</b> изображение 48×48, два свёрточных слоя, 4 609 обученных параметров, пять визуальных категорий. Обучение и независимый тест — только на процедурно сгенерированных кадрах. Точность на реальных улицах неизвестна.</p><p><b>Text MLP:</b> текстовые обращения, четыре категории проблем и класс для других тем. Обучение на синтетических примерах; человек принимает окончательное решение.</p></div><div class="cv-model-schema"><span>ИЗОБРАЖЕНИЕ</span><strong>48 × 48</strong><i>↓</i><span>CNN · CONV + ReLU × 2</span><strong>4 609 параметров</strong><i>↓</i><span>РЕЗУЛЬТАТ</span><strong>5 категорий + проверка</strong></div></section>
+<section class="panel detail-box bench"><h2>Как яркость влияет на CNN</h2><p>В каждом режиме проверены одни и те же 400 новых синтетических сцен. Доля верных ответов зависит от экспозиции.</p><div class="bench-grid"><div><small>Яркость ×0,5</small><strong>64%</strong><span>256 из 400</span></div><div><small>Яркость ×0,75</small><strong>98,5%</strong><span>394 из 400</span></div><div><small>Яркость ×1,0</small><strong>100%</strong><span>400 из 400</span></div><div><small>Яркость ×1,25</small><strong>100%</strong><span>400 из 400</span></div><div><small>Яркость ×1,5</small><strong>93%</strong><span>372 из 400</span></div></div><p>На реальных камерах качество ещё предстоит измерить.</p></section></section>
+<section class="view" id="view-report">
+<div class="page-heading"><h1>Сообщить о проблеме</h1><p>Укажите участок и опишите, что произошло со светом. Перед отправкой вы увидите категорию и приоритет проверки.</p></div>
+<div class="report-layout"><section class="panel submission-panel"><div class="panel-header"><div><span class="panel-kicker">ШАГ 01 / ЗАЯВКА</span><h2>Описание проблемы</h2></div><span class="step-count">1 / 2</span></div><label class="field-label" for="report-place">Где это произошло?</label><select class="field-input" id="report-place"></select><label class="field-label" for="report-text">Что произошло?</label><textarea class="field-input big-textarea" id="report-text" maxlength="600" placeholder="Например: возле пешеходного перехода на Цветном бульваре не горят два фонаря, вечером водителям не видно людей..."></textarea><div class="input-helper"><span>Не указывайте имя, телефон и другие персональные данные.</span><span id="char-count">0 / 600</span></div><div class="suggestion-row"><span>ПОПРОБУЙТЕ:</span><button class="example-chip" data-example="На дорожке у ТюмГУ не работает фонарь уже три вечера">Не горит фонарь</button><button class="example-chip" data-example="У перехода возле центрального рынка темно, водителям не видно пешеходов, очень опасно">Опасный переход</button></div><div class="v2-voice-row"><button class="utility-button" id="v2-dictate" type="button">🎙 Продиктовать текст</button><span>Только при поддержке браузера. Распознавание может выполняться сторонним сервисом браузера, не Т2.</span></div><div class="form-error" id="form-error" role="alert"></div><button class="primary-button full analyze-btn" id="analyze-button">✦ Проанализировать нейросетью <span>↗</span></button></section>
+<section class="panel analysis-panel"><div class="panel-header"><div><span class="panel-kicker">ШАГ 02 / РЕЗУЛЬТАТ</span><h2>Вывод LUMEN AI</h2></div><span class="model-chip">MLP · 256 → 40 → 5</span></div><div class="analysis-output empty" id="analysis-output"><div class="spark-symbol">✳</div><h3>Здесь появится результат</h3><p>Введите сообщение слева и нажмите «Проанализировать». Нейросеть определит характер проблемы и предложит приоритет.</p></div><div class="analysis-disclaimer">Модель обучена на синтетических примерах. Результат не является автоматическим заключением об опасности и требует проверки человеком.</div></section></div>
+<section class="report-how"><div><span>◌</span><b>Работает без API-ключей</b><small>Нейросеть запускается на устройстве</small></div><div><span>♧</span><b>Без передачи личных данных</b><small>Это локальный MVP, не городская горячая линия</small></div><div><span>↗</span><b>Готово для пилота</b><small>Механика интеграции с Т2 спроектирована</small></div></section>
+</section>
+<section class="view" id="view-analytics">
+<div class="page-heading"><h1>Аналитика обращений</h1><p>Категории, статусы и участки с наибольшим дефицитом света в текущем наборе данных.</p></div>
+<div class="analytics-grid"><section class="panel analytic-big"><div class="panel-header"><div><span class="panel-kicker">ПО ТИПАМ ПРОБЛЕМ</span><h2>Что беспокоит жителей</h2></div></div><div class="type-chart" id="type-chart"></div></section><section class="panel analytic-small"><div class="panel-header"><div><span class="panel-kicker">СТАТУС ОБРАЩЕНИЙ</span><h2>Оперативная сводка</h2></div></div><div class="status-donut" id="status-donut"></div></section></div>
+<section class="panel areas-panel"><div class="panel-header"><div><span class="panel-kicker">ПРИОРИТЕТНЫЕ ТОЧКИ</span><h2>Где требуется внимание</h2></div><span class="small-counter">ПИЛОТНАЯ СХЕМА</span></div><div class="areas-table" id="areas-table"></div></section>
+<div class="analytics-note"><b>Важно:</b> статистика рассчитывается только по демонстрационным и добавленным вами сообщениям. Она не основана на фактических данных об освещении Тюмени или данных клиентов Т2.</div>
+</section>
+<section class="view" id="view-dispatch">
+<div class="page-heading"><h1>Диспетчерская</h1><p>Найдите обращение, проверьте похожие сообщения и обновите статус работы.</p></div>
+<div class="dispatch-summary" id="dispatch-summary"></div>
+<section class="panel dispatch-panel"><div class="dispatch-toolbar"><div><span class="panel-kicker">ОЧЕРЕДЬ ОБРАЩЕНИЙ</span><h2>Рабочие заявки <span class="muted-h2">/ пилот</span></h2></div><div class="dispatch-actions"><button class="utility-button" id="export-csv">↓ CSV</button><button class="utility-button" id="export-json">↓ JSON</button><button class="utility-button" id="import-json-trigger">↑ Импорт</button><input accept=".json,application/json" hidden="" id="import-json" type="file"/><button class="utility-button utility-danger" id="reset-demo">↺ Сброс</button></div></div>
+<div class="dispatch-filters"><label><span>Поиск по обращениям</span><input id="dispatch-search" placeholder="Участок, описание или ID" type="search"/></label><label><span>Статус</span><select id="dispatch-status"><option value="all">Все</option><option value="active">Активные</option><option value="open">Новые</option><option value="in_progress">В работе</option><option value="resolved">Устранённые</option></select></label><label><span>Приоритет</span><select id="dispatch-priority"><option value="all">Любой</option><option value="critical">Критический</option><option value="high">Высокий</option><option value="medium">Средний</option></select></label></div>
+<div class="dispatch-table" id="dispatch-table"></div><div class="dispatch-footer">✦ DEMO · Выявление неисправности, её фактический ремонт и закрытие заявки должны подтверждаться ответственной службой.</div>
+</section>
+</section>
+<section class="view" id="view-pilot">
+<div class="page-heading"><h1>О проекте LUMEN</h1><p>Студенческий прототип для кейс-чемпионата Т2 × ТюмГУ. Предложение для пилота в Тюмени.</p></div><div class="pilot-overview"><section class="panel detail-box"><h2>Что показать на защите</h2><p>Один пример проходит через проверку кадра, пересчёт двух маршрутов и план из трёх осмотров. Репетиция использует отдельный учебный набор.</p><div class="cover-actions"><button class="primary-button" id="pilot-start-demo">Начать репетицию</button><a class="utility-button" href="pitch/LUMEN_5_0_Pitch.pdf" rel="noopener noreferrer" target="_blank">Презентация · PDF ↗</a></div></section><section class="panel detail-box"><h2>Предложение для Т2</h2><p>На согласованных участках проверить канал передачи кадров и сопоставить очередь осмотров с агрегированной геоаналитикой. Для этого нужны договорённости с городом и оператором.</p><a href="https://eng.t2.ru/business/geoanalitika" rel="noopener noreferrer" target="_blank">Геоаналитика Т2 ↗</a></section></div>
+
+
+
+
+
+
+
+<section class="panel detail-box pilot-metrics"><h2>Что измерить за восемь недель</h2><div class="bench-grid"><div><strong>≥80%</strong><span>Precision и recall по размеченным ночным кадрам, каждая метрика отдельно</span></div><div><strong>≤1</strong><span>Ложная тревога на камеру за ночь</span></div><div><strong>−25%</strong><span>Целевое сокращение медианы времени до решения диспетчера</span></div></div><p>Недели 1–2 — договорённости и замер исходного процесса, 3–4 — разметка и пороги, 5–6 — параллельная работа, 7–8 — независимый разбор ошибок и решение о продолжении.</p></section><section class="panel pilot-economics"><div><span class="panel-kicker">ЭКОНОМИКА / СЦЕНАРНАЯ МОДЕЛЬ</span><h2>Сколько времени может сэкономить AI-триаж?</h2><p>Меняйте допущения, чтобы оценить потенциальную пользу. Это калькулятор сценариев, а не фактические данные города или Т2.</p><div class="pilot-calc-grid"><label for="calc-volume">Обращений в месяц <strong id="calc-volume-value">600</strong><input id="calc-volume" max="2000" min="100" step="100" type="range" value="600"/></label><label for="calc-minutes">Минут на ручную сортировку <strong id="calc-minutes-value">5</strong><input id="calc-minutes" max="15" min="2" step="1" type="range" value="5"/></label><label for="calc-reduction">Ожидаемое снижение трудозатрат <strong id="calc-reduction-value">30%</strong><input id="calc-reduction" max="60" min="10" step="5" type="range" value="30"/></label><label for="calc-hour">Стоимость часа работы, ₽ <strong id="calc-hour-value">600</strong><input id="calc-hour" max="1200" min="250" step="50" type="range" value="600"/></label></div></div><div class="pilot-calc-result"><span>ПОТЕНЦИАЛЬНАЯ ЭКОНОМИЯ</span><strong id="calc-hours">15 ч</strong><small>часов работы в месяц</small><strong id="calc-money">9 000 ₽</strong><small>в месяц по выбранным предположениям</small><div>Не включает стоимость разработки, эксплуатации, проверок, интеграций и обработки ошибок ИИ.</div></div></section>
+
+</section>
+</main>
+<footer class="app-footer"><span>LUMEN 5.0 · Учебная модель городской сети · <a href="credits.html">Авторы материалов</a></span></footer>
+</div>
+</div>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+
+
+
+
+
+
+
+
+<script src="runtime.js"></script><script src="model.js"></script><script src="seed.js"></script><script src="app.js"></script><script src="operations.js"></script><script src="v2.js"></script><script src="cv_model.js"></script><script src="vision.js"></script><script src="workspace.js"></script><script src="shift.js"></script><script src="vendor/leaflet/leaflet.js"></script><script src="geo.js"></script><script src="v4.js"></script></body>
+</html>

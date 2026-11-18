@@ -1,0 +1,53 @@
+{
+  "training": "procedural synthetic city-like illumination frames ONLY",
+  "train_samples": 1400,
+  "synthetic_holdout_samples": 400,
+  "heldout_synthetic_accuracy": 1.0,
+  "confusion_matrix": [
+    [
+      80,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      80,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      80,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      80,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      80
+    ]
+  ],
+  "classes": [
+    "lit",
+    "dark",
+    "uneven",
+    "glare",
+    "day"
+  ],
+  "independent_real_camera_validation": "NOT PERFORMED",
+  "source": "ml/train_vision.py",
+  "seed": 20261114
+}

@@ -1,0 +1,12 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const root=path.resolve(__dirname,'..');
+const ctx={console,window:{},document:{readyState:'loading',addEventListener:()=>{}},localStorage:{getItem:()=>null},navigator:{},Math,Float64Array,Set,Intl,Date};
+vm.createContext(ctx);
+for(const f of ['model.js','seed.js','app.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
+const a=vm.runInContext("REPORTS=JSON.parse(JSON.stringify(window.LUMEN_SEED));({fast:dijkstra(8,4,'fast'),safe:dijkstra(8,4,'safe'),l:currentLight(NODES[3])})",ctx);
+const b=vm.runInContext("REPORTS.push({id:'CV-CHECK',node:3,text:'Synthetic CV manually confirmed in demo',label:'dim',status:'open',priority:'medium',source:'cv'});({fast:dijkstra(8,4,'fast'),safe:dijkstra(8,4,'safe'),l:currentLight(NODES[3])})",ctx);
+console.log('before',a,'after',b);
+if(b.l>=a.l)throw Error('Confirmed CV signal did not change modeled light');
+if(a.safe.join()===b.safe.join())throw Error('Demo lighting change did not change expected lit route');
+if(b.safe.join()===b.fast.join())throw Error('Safe route did not diverge from fast route after signal');
+console.log('PASS: modeled route changes after confirmation at Цветной бульвар.');

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "demo-1",
+    "node": 7,
+    "text": "На улице Первомайской у перехода темно, водителям плохо видно пешеходов. Очень опасно вечером.",
+    "label": "danger",
+    "priority": "critical",
+    "status": "open",
+    "source": "demo"
+  },
+  {
+    "id": "demo-2",
+    "node": 6,
+    "text": "На улице Республики уже третий вечер не работает фонарь возле пешеходной дорожки.",
+    "label": "outage",
+    "priority": "high",
+    "status": "open",
+    "source": "demo"
+  },
+  {
+    "id": "demo-3",
+    "node": 8,
+    "text": "На пешеходной зоне вдоль квартала почти нет света, поздно вечером очень темно.",
+    "label": "dim",
+    "priority": "medium",
+    "status": "open",
+    "source": "demo"
+  },
+  {
+    "id": "demo-4",
+    "node": 11,
+    "text": "На площади 400-летия мерцает и щелкает уличный светильник.",
+    "label": "flicker",
+    "priority": "high",
+    "status": "open",
+    "source": "demo"
+  },
+  {
+    "id": "demo-5",
+    "node": 2,
+    "text": "В сквере Сибирских кошек один из фонарей перестал гореть.",
+    "label": "outage",
+    "priority": "high",
+    "status": "open",
+    "source": "demo"
+  },
+  {
+    "id": "demo-6",
+    "node": 9,
+    "text": "В торговом квартале не работало уличное освещение.",
+    "label": "outage",
+    "priority": "high",
+    "status": "resolved",
+    "source": "demo"
+  },
+  {
+    "id": "demo-7",
+    "node": 3,
+    "text": "Вечером на Цветном бульваре было слишком темно около дорожки.",
+    "label": "dim",
+    "priority": "medium",
+    "status": "resolved",
+    "source": "demo"
+  },
+  {
+    "id": "demo-8",
+    "node": 12,
+    "text": "Сломан фонарь рядом с городским сквером, ночью нет света.",
+    "label": "outage",
+    "priority": "high",
+    "status": "open",
+    "source": "demo"
+  },
+  {
+    "id": "demo-9",
+    "node": 7,
+    "text": "На Первомайской уже второй день возле перехода нет нормального света, пешеходов в темноте не видно.",
+    "label": "danger",
+    "priority": "critical",
+    "status": "open",
+    "source": "demo"
+  },
+  {
+    "id": "demo-10",
+    "node": 6,
+    "text": "На улице Республики второй человек сообщает о перегоревшей лампе у пешеходной дорожки.",
+    "label": "outage",
+    "priority": "high",
+    "status": "in_progress",
+    "source": "demo"
+  }
+]

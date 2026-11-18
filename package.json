@@ -1,0 +1,15 @@
+{
+  "name": "lumen-vision-lab",
+  "version": "5.0.0",
+  "private": true,
+  "description": "LUMEN — проверка кадров и планирование осмотров городской сети",
+  "scripts": {
+    "test:cv": "node tests/test_cv_node.cjs",
+    "test:routing": "node tests/test_routing_node.cjs",
+    "test:v4": "node tests/test_v4_node.cjs",
+    "test": "node tests/test_routing_node.cjs && node tests/test_cv_node.cjs && node tests/test_v4_node.cjs && node tests/ui_smoke.cjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.2"
+  }
+}
